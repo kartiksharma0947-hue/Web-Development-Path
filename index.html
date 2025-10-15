@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEB DEVELOPMENT PATH</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Navigation Styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links li {
+            position: relative;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 80px;
+            min-height: calc(100vh - 80px);
+        }
+
+        .page {
+            display: none;
+            min-height: calc(100vh - 80px);
+            padding: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .page.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Home Page Styles */
+        .home-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            min-height: 70vh;
+        }
+
+        .home-text h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .home-text p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.5);
+        }
+
+        .home-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .laptop-icon {
+            font-size: 15rem;
+            color: rgba(255, 255, 255, 0.8);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Glass Card Styles */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 1rem 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Resources Page Styles */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .resource-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .resource-card i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #feca57;
+        }
+
+        .resource-card h3 {
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .resource-card p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+
+        /* Mini Flowchart */
+        .mini-flowchart {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 3rem 0;
+        }
+
+        .flow-item {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            color: white;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .flow-arrow {
+            color: #feca57;
+            font-size: 1.5rem;
+            margin: 0 0.5rem;
+        }
+
+        /* Path Page Styles */
+        .path-flowchart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .path-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .path-item {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            padding: 1.5rem 2rem;
+            color: white;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            min-width: 120px;
+        }
+
+        .path-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .path-arrow-down {
+            color: #feca57;
+            font-size: 2rem;
+        }
+
+        /* Tooltip */
+        .tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .path-item:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Menu Page Styles */
+        .menu-showcase {
+            text-align: center;
+            color: white;
+        }
+
+        .menu-demo {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        /* About Page Styles */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .about-text {
+            color: white;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #feca57;
+        }
+
+        .contact-info {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1rem 0;
+            color: white;
+        }
+
+        .contact-item i {
+            font-size: 1.2rem;
+            color: #feca57;
+            width: 30px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: #feca57;
+            transform: translateY(-3px);
+        }
+
+        /* Section Titles */
+        .section-title {
+            text-align: center;
+            color: white;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(255, 255, 255, 0.1);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 1rem 0;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .home-content,
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            .home-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .laptop-icon {
+                font-size: 8rem;
+            }
+
+            .path-row {
+                flex-direction: column;
+            }
+
+            .mini-flowchart {
+                flex-direction: column;
+            }
+
+            .flow-arrow {
+                transform: rotate(90deg);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .home-text h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .path-item {
+                min-width: 100px;
+                padding: 1rem 1.5rem;
+            }
+        }
+
+        /* Animation Classes */
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-code"></i>
+                WEB DEV PATH
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#" data-page="home" class="nav-link active">Home</a></li>
+                <li><a href="#" data-page="resources" class="nav-link">Resources</a></li>
+                <li><a href="#" data-page="path" class="nav-link">Path</a></li>
+                <li><a href="#" data-page="menu" class="nav-link">Menu</a></li>
+                <li><a href="#" data-page="about" class="nav-link">About Us</a></li>
+            </ul>
+            <div class="mobile-menu" id="mobileMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Home Page -->
+        <section id="home" class="page active">
+            <div class="container">
+                <div class="home-content">
+                    <div class="home-text">
+                        <h1>Welcome to Web Development Path</h1>
+                        <p>Master web development with our comprehensive, step-by-step learning path. Unlike other scattered tutorials, we provide a structured journey from beginner to expert, covering everything from HTML basics to full-stack deployment.</p>
+                        <p>Our unique approach focuses on practical projects, real-world applications, and industry best practices that actually matter in today's tech landscape.</p>
+                        <a href="#" class="cta-button" data-page="path">Start Your Journey</a>
+                    </div>
+                    <div class="home-visual">
+                        <i class="fas fa-laptop-code laptop-icon"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resources Page -->
+        <section id="resources" class="page">
+            <div class="container">
+                <h2 class="section-title">Development Resources</h2>
+                <p class="section-subtitle">Comprehensive collection of tools, documentation, and learning materials for every aspect of web development.</p>
+                
+                <div class="resources-grid">
+                    <div class="resource-card" onclick="window.open('https://developer.mozilla.org/en-US/docs/Web/HTML', '_blank')">
+                        <i class="fab fa-html5"></i>
+                        <h3>HTML</h3>
+                        <p>Structure and semantics - the foundation of every website</p>
+                    </div>
+                    <div class="resource-card" onclick="window.open('https://developer.mozilla.org/en-US/docs/Web/CSS', '_blank')">
+                        <i class="fab fa-css3-alt"></i>
+                        <h3>CSS</h3>
+                        <p>Styling, layouts, animations, and responsive design</p>
+                    </div>
+                    <div class="resource-card" onclick="window.open('https://developer.mozilla.org/en-US/docs/Web/JavaScript', '_blank')">
+                        <i class="fab fa-js-square"></i>
+                        <h3>JavaScript</h3>
+                        <p>Dynamic behavior, interactivity, and modern ES6+ features</p>
+                    </div>
+                    <div class="resource-card" onclick="window.open('https://reactjs.org/docs', '_blank')">
+                        <i class="fab fa-react"></i>
+                        <h3>React</h3>
+                        <p>Component-based UI library for building modern interfaces</p>
+                    </div>
+                    <div class="resource-card" onclick="window.open('https://nodejs.org/en/docs', '_blank')">
+                        <i class="fab fa-node-js"></i>
+                        <h3>Node.js</h3>
+                        <p>Server-side JavaScript runtime for backend development</p>
+                    </div>
+                    <div class="resource-card" onclick="window.open('https://www.mongodb.com/docs', '_blank')">
+                        <i class="fas fa-database"></i>
+                        <h3>MongoDB</h3>
+                        <p>NoSQL database for modern, scalable applications</p>
+                    </div>
+                </div>
+
+                <div class="glass-card">
+                    <h3 style="color: white; text-align: center; margin-bottom: 2rem;">Web Development Flow</h3>
+                    <div class="mini-flowchart">
+                        <div class="flow-item">Frontend</div>
+                        <i class="fas fa-arrow-right flow-arrow"></i>
+                        <div class="flow-item">Backend</div>
+                        <i class="fas fa-arrow-right flow-arrow"></i>
+                        <div class="flow-item">Database</div>
+                        <i class="fas fa-arrow-right flow-arrow"></i>
+                        <div class="flow-item">Deployment</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Path Page -->
+        <section id="path" class="page">
+            <div class="container">
+                <h2 class="section-title">Web Development Path</h2>
+                <p class="section-subtitle">Follow this structured learning path to become a full-stack web developer. Each step builds upon the previous ones.</p>
+                
+                <div class="path-flowchart">
+                    <!-- Frontend Foundation -->
+                    <div class="path-row">
+                        <div class="path-item" data-tooltip="Structure and semantics of web pages">
+                            HTML
+                            <div class="tooltip">Structure and semantics of web pages</div>
+                        </div>
+                    </div>
+                    <i class="fas fa-arrow-down path-arrow-down"></i>
+                    
+                    <div class="path-row">
+                        <div class="path-item" data-tooltip="Styling, layouts, and responsive design">
+                            CSS
+                            <div class="tooltip">Styling, layouts, and responsive design</div>
+                        </div>
+                    </div>
+                    <i class="fas fa-arrow-down path-arrow-down"></i>
+                    
+                    <div class="path-row">
+                        <div class="path-item" data-tooltip="Programming fundamentals and DOM manipulation">
+                            JavaScript
+                            <div class="tooltip">Programming fundamentals and DOM manipulation</div>
+                        </div>
+                    </div>
+                    <i class="fas fa-arrow-down path-arrow-down"></i>
+                    
+                    <!-- Frontend Frameworks -->
+                    <div class="path-row">
+                        <div class="path-item" data-tooltip="Component-based UI development">
+                            React
+                            <div class="tooltip">Component-based UI development</div>
+                        </div>
+                    </div>
+                    <i class="fas fa-arrow-down path-arrow-down"></i>
+                    
+                    <!-- Backend Development -->
+                    <div class="path-row">
+                        <div class="path-item" data-tooltip="Server-side JavaScript runtime">
+                            Node.js
+                            <div class="tooltip">Server-side JavaScript runtime</div>
+                        </div>
+                    </div>
+                    <i class="fas fa-arrow-down path-arrow-down"></i>
+                    
+                    <div class="path-row">
+                        <div class="path-item" data-tooltip="Web application framework for Node.js">
+                            Express
+                            <div class="tooltip">Web application framework for Node.js</div>
+                        </div>
+                    </div>
+                    <i class="fas fa-arrow-down path-arrow-down"></i>
+                    
+                    <!-- Database -->
+                    <div class="path-row">
+                        <div class="path-item" data-tooltip="NoSQL database for modern applications">
+                            MongoDB
+                            <div class="tooltip">NoSQL database for modern applications</div>
+                        </div>
+                    </div>
+                    <i class="fas fa-arrow-down path-arrow-down"></i>
+                    
+                    <!-- Deployment -->
+                    <div class="path-row">
+                        <div class="path-item" data-tooltip="Deploy your applications to the cloud">
+                            Deployment
+                            <div class="tooltip">Deploy your applications to the cloud</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Menu Page -->
+        <section id="menu" class="page">
+            <div class="container">
+                <div class="menu-showcase">
+                    <h2 class="section-title">Navigation Menu</h2>
+                    <p class="section-subtitle">Experience smooth navigation with our modern, responsive menu design featuring glassmorphism effects and smooth animations.</p>
+                    
+                    <div class="menu-demo glass-card">
+                        <h3 style="color: white; margin-bottom: 1.5rem;">Menu Features</h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; text-align: left;">
+                            <div style="color: rgba(255, 255, 255, 0.9);">
+                                <i class="fas fa-mouse-pointer" style="color: #feca57; margin-right: 0.5rem;"></i>
+                                <strong>Smooth Hover Effects:</strong> Interactive menu items with elegant hover animations
+                            </div>
+                            <div style="color: rgba(255, 255, 255, 0.9);">
+                                <i class="fas fa-mobile-alt" style="color: #feca57; margin-right: 0.5rem;"></i>
+                                <strong>Responsive Design:</strong> Adapts perfectly to all screen sizes and devices
+                            </div>
+                            <div style="color: rgba(255, 255, 255, 0.9);">
+                                <i class="fas fa-paint-brush" style="color: #feca57; margin-right: 0.5rem;"></i>
+                                <strong>Glassmorphism Style:</strong> Modern translucent design with backdrop blur effects
+                            </div>
+                            <div style="color: rgba(255, 255, 255, 0.9);">
+                                <i class="fas fa-bolt" style="color: #feca57; margin-right: 0.5rem;"></i>
+                                <strong>Fast Navigation:</strong> Instant page transitions with smooth animations
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="glass-card" style="margin-top: 2rem;">
+                        <h3 style="color: white; margin-bottom: 1rem;">How to Navigate</h3>
+                        <p style="color: rgba(255, 255, 255, 0.9); line-height: 1.6;">
+                            Use the navigation bar at the top to explore different sections of the website. Each menu item takes you to a dedicated page with specific content:
+                        </p>
+                        <ul style="color: rgba(255, 255, 255, 0.8); margin: 1rem 0; text-align: left; max-width: 500px; margin-left: auto; margin-right: auto;">
+                            <li style="margin: 0.5rem 0;"><strong>Home:</strong> Welcome message and overview</li>
+                            <li style="margin: 0.5rem 0;"><strong>Resources:</strong> Learning materials and documentation</li>
+                            <li style="margin: 0.5rem 0;"><strong>Path:</strong> Complete learning roadmap</li>
+                            <li style="margin: 0.5rem 0;"><strong>Menu:</strong> Navigation guide and features</li>
+                            <li style="margin: 0.5rem 0;"><strong>About Us:</strong> Contact information and mission</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Us Page -->
+        <section id="about" class="page">
+            <div class="container">
+                <h2 class="section-title">About Us</h2>
+                
+                <div class="about-content">
+                    <div class="about-text">
+                        <h2>Our Mission</h2>
+                        <p style="color: rgba(255, 255, 255, 0.9); line-height: 1.7; margin-bottom: 1.5rem;">
+                            We believe that learning web development should be accessible, structured, and practical. Our mission is to provide a clear, step-by-step path that takes you from complete beginner to confident full-stack developer.
+                        </p>
+                        <p style="color: rgba(255, 255, 255, 0.9); line-height: 1.7; margin-bottom: 1.5rem;">
+                            Unlike scattered online tutorials, we offer a comprehensive curriculum that builds knowledge systematically, ensuring you understand not just how to code, but why certain approaches work better than others.
+                        </p>
+                        
+                        <h3 style="color: #feca57; margin-top: 2rem; margin-bottom: 1rem;">Why Choose Our Path?</h3>
+                        <ul style="color: rgba(255, 255, 255, 0.9); line-height: 1.6;">
+                            <li style="margin: 0.5rem 0;">📚 Structured curriculum from basics to advanced</li>
+                            <li style="margin: 0.5rem 0;">💼 Industry-relevant projects and practices</li>
+                            <li style="margin: 0.5rem 0;">🚀 Focus on modern tools and technologies</li>
+                            <li style="margin: 0.5rem 0;">🎯 Clear learning objectives for each step</li>
+                            <li style="margin: 0.5rem 0;">🤝 Supportive learning community</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="contact-info">
+                        <h3 style="color: white; margin-bottom: 1.5rem; text-align: center;">Get In Touch</h3>
+                        
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>contact@webdevpath.com</span>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+91 9876543210</span>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Delhi , India </span>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <i class="fas fa-globe"></i>
+                            <span>www.webdevpath.com</span>
+                        </div>
+                        
+                        <div class="social-icons">
+                            <a href="#" class="social-icon" title="Twitter">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="social-icon" title="GitHub">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="#" class="social-icon" title="LinkedIn">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="#" class="social-icon" title="Discord">
+                                <i class="fab fa-discord"></i>
+                            </a>
+                            <a href="#" class="social-icon" title="YouTube">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Navigation functionality
+        class NavigationManager {
+            constructor() {
+                this.currentPage = 'home';
+                this.pages = document.querySelectorAll('.page');
+                this.navLinks = document.querySelectorAll('.nav-link');
+                this.mobileMenu = document.getElementById('mobileMenu');
+                this.navLinksContainer = document.getElementById('navLinks');
+                
+                this.init();
+            }
+            
+            init() {
+                // Add click listeners to navigation links
+                this.navLinks.forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const targetPage = link.getAttribute('data-page');
+                        this.navigateToPage(targetPage);
+                    });
+                });
+                
+                // Mobile menu toggle
+                this.mobileMenu.addEventListener('click', () => {
+                    this.navLinksContainer.classList.toggle('active');
+                    this.toggleMobileMenu();
+                });
+                
+                // Handle CTA button navigation
+                document.addEventListener('click', (e) => {
+                    if (e.target.hasAttribute('data-page')) {
+                        e.preventDefault();
+                        const targetPage = e.target.getAttribute('data-page');
+                        this.navigateToPage(targetPage);
+                    }
+                });
+                
+                // Handle window resize
+                window.addEventListener('resize', () => {
+                    if (window.innerWidth > 768) {
+                        this.navLinksContainer.classList.remove('active');
+                        this.resetMobileMenu();
+                    }
+                });
+            }
+            
+            navigateToPage(pageName) {
+                if (pageName === this.currentPage) return;
+                
+                // Hide current page
+                const currentPageElement = document.getElementById(this.currentPage);
+                currentPageElement.classList.remove('active');
+                
+                // Show new page with animation delay
+                setTimeout(() => {
+                    const newPageElement = document.getElementById(pageName);
+                    newPageElement.classList.add('active');
+                    newPageElement.classList.add('fade-in');
+                    
+                    // Remove animation class after animation completes
+                    setTimeout(() => {
+                        newPageElement.classList.remove('fade-in');
+                    }, 600);
+                }, 100);
+                
+                // Update navigation
+                this.updateNavigation(pageName);
+                this.currentPage = pageName;
+                
+                // Close mobile menu if open
+                this.navLinksContainer.classList.remove('active');
+                this.resetMobileMenu();
+                
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+            
+            updateNavigation(activePage) {
+                this.navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('data-page') === activePage) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+            
+            toggleMobileMenu() {
+                const spans = this.mobileMenu.querySelectorAll('span');
+                spans[0].style.transform = this.navLinksContainer.classList.contains('active') 
+                    ? 'rotate(45deg) translate(5px, 5px)' : 'rotate(0) translate(0, 0)';
+                spans[1].style.opacity = this.navLinksContainer.classList.contains('active') ? '0' : '1';
+                spans[2].style.transform = this.navLinksContainer.classList.contains('active') 
+                    ? 'rotate(-45deg) translate(7px, -6px)' : 'rotate(0) translate(0, 0)';
+            }
+            
+            resetMobileMenu() {
+                const spans = this.mobileMenu.querySelectorAll('span');
+                spans.forEach(span => {
+                    span.style.transform = 'rotate(0) translate(0, 0)';
+                    span.style.opacity = '1';
+                });
+            }
+        }
+        
+        // Interactive features for path items
+        class PathInteraction {
+            constructor() {
+                this.init();
+            }
+            
+            init() {
+                const pathItems = document.querySelectorAll('.path-item');
+                
+                pathItems.forEach(item => {
+                    item.addEventListener('click', () => {
+                        this.showPathDetails(item);
+                    });
+                });
+            }
+            
+            showPathDetails(item) {
+                const skill = item.textContent.trim();
+                const tooltip = item.querySelector('.tooltip');
+                const description = tooltip ? tooltip.textContent : 'Learn more about ' + skill;
+                
+                // Create a simple alert for now (can be enhanced with a modal)
+                const details = this.getSkillDetails(skill);
+                alert(`${skill}\n\n${description}\n\nTips: ${details}`);
+            }
+            
+            getSkillDetails(skill) {
+                const skillDetails = {
+                    'HTML': 'Start with basic tags, then learn semantic HTML5 elements. Practice creating forms and tables.',
+                    'CSS': 'Master selectors, box model, flexbox, and grid. Learn responsive design and animations.',
+                    'JavaScript': 'Understand variables, functions, and DOM manipulation. Practice with projects and challenges.',
+                    'React': 'Learn components, props, state, and hooks. Build interactive user interfaces.',
+                    'Node.js': 'Understand server-side JavaScript, npm packages, and file system operations.',
+                    'Express': 'Learn routing, middleware, and building REST APIs. Handle requests and responses.',
+                    'MongoDB': 'Master document-based databases, queries, and data modeling.',
+                    'Deployment': 'Learn about hosting platforms, environment variables, and CI/CD pipelines.'
+                };
+                
+                return skillDetails[skill] || 'Focus on hands-on practice and building real projects.';
+            }
+        }
+        
+        // Smooth scrolling and animations
+        class AnimationManager {
+            constructor() {
+                this.init();
+            }
+            
+            init() {
+                // Add scroll-triggered animations
+                this.observeElements();
+                
+                // Add hover effects to cards
+                this.addCardEffects();
+            }
+            
+            observeElements() {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.animation = 'fadeIn 0.6s ease-out';
+                        }
+                    });
+                });
+                
+                document.querySelectorAll('.glass-card, .resource-card, .path-item').forEach(el => {
+                    observer.observe(el);
+                });
+            }
+            
+            addCardEffects() {
+                document.querySelectorAll('.resource-card').forEach(card => {
+                    card.addEventListener('mouseenter', () => {
+                        card.style.transform = 'translateY(-5px) scale(1.02)';
+                    });
+                    
+                    card.addEventListener('mouseleave', () => {
+                        card.style.transform = 'translateY(0) scale(1)';
+                    });
+                });
+            }
+        }
+        
+        // Initialize all managers when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new NavigationManager();
+            new PathInteraction();
+            new AnimationManager();
+            
+            // Add loading effect
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+                document.body.style.transition = 'opacity 0.5s ease-in';
+            }, 100);
+        });
+        
+        // Handle navbar background on scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.15)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.1)';
+            }
+        });
+    </script>
+</body>
+</html>
